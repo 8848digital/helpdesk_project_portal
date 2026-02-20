@@ -212,7 +212,7 @@ const ticketAdditionalInfo = computed(() => {
       value: ticket.data.agent_group || "-",
     },
     {
-      label: "Priority",
+      label: "Issue Type",
       value: ticket.data.priority,
     },
   ];
