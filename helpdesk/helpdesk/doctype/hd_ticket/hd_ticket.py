@@ -324,9 +324,9 @@ class HDTicket(Document):
         old_doc = self.get_doc_before_save()
         is_closed = old_doc.status == "Closed"
         is_rated = bool(old_doc.feedback)
-        if is_closed or is_rated:
-            text = _("Closed or rated tickets cannot be updated by non-agents")
-            frappe.throw(text, frappe.PermissionError)
+        # if is_closed or is_rated:
+        #     text = _("Closed or rated tickets cannot be updated by non-agents")
+        #     frappe.throw(text, frappe.PermissionError)
 
     def handle_ticket_activity_update(self):
         """
