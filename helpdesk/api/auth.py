@@ -16,8 +16,6 @@ def get_user():
         "username",
         "time_zone",
         "language",
-        "mobile_no",
-        "phone",
     ]
     user = frappe.get_value(
         doctype="User",
@@ -34,8 +32,6 @@ def get_user():
     user_name = user.full_name
     user_id = user.name
     username = user.username
-    mobile_no = user.mobile_no
-    phone = user.phone
     is_manager = ("Agent Manager") in frappe.get_roles(current_user)
     language = user.language or frappe.db.get_single_value(
         "System Settings", "language"
@@ -56,8 +52,6 @@ def get_user():
         "time_zone": user.time_zone,
         "language": language,
         "user_teams": user_team_names,
-        "mobile_no": mobile_no,
-        "phone": phone,
     }
 
 
