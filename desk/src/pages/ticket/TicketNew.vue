@@ -155,7 +155,13 @@ const route = useRoute();
 const router = useRouter();
 const { $dialog } = globalStore();
 const { updateOnboardingStep } = useOnboarding("helpdesk");
-const { isManager, userId: userID } = useAuthStore();
+const { 
+  isManager, 
+  userId: userID,
+  userName,
+  userMobileNo,
+  userPhone,
+} = useAuthStore();
 
 const subject = ref("");
 const description = ref("");
@@ -179,6 +185,20 @@ const template = createResource({
       applyFilters,
     });
     setupTemplateFields(data.fields);
+    templateFields.raised_by = userID;
+    templateFields.custom_raised_by_name = userName || "";
+    let mobile = userMobileNo || userPhone || "";
+
+    if (mobile) {
+      mobile = mobile.trim();
+      mobile = mobile.replace(/\s+/g, "");
+      if (!mobile.startsWith("+")) {
+        mobile = "+91 " + mobile;
+      }
+    } else {
+      mobile = "+91 ";
+    }
+    templateFields.custom_raised_by_mobile_no = mobile;
   },
 });
 
